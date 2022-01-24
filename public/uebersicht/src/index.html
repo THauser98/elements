@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Periodic Table</title>
+    <title>elements</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;700&display=swap');
     </style> 
@@ -11,14 +11,23 @@
 <body>
     <canvas class="webgl"></canvas>
     <section class="section">
-        <img class="logo" src="../static/elements_1c_white_var3.png">
+        <img class="logo" src="../static/logo_colored.svg">
         <p>Lerne mit dieser interaktiven 3D-Anwendung die chemischen Elemente von einer neuen Seite kennen. Wir brechen die starre Struktur der Periodentafel auf stellen dir wichtige Eigenschaften auf neue Weise vor.</p>
-        <img src="../static/atom_white.png"/>
         <button id="starter">Los geht's</button>
     </section>
-    <div class="switcher">
+    <img class="logo-helix" src="../static/logo_colored.svg"/>
+    <!-- <div class="switcher">
         <button class="btn table active">Table</button>
         <button class="btn helix">Helix</button>
+    </div> --> 
+    <div class="toggle">
+        <label class="switch">
+            <input class="btn" type="checkbox">
+            <span class="slider round"></span>
+        </label>
+    </div> 
+    <div class="state">
+        <h>Helix</h>
     </div>
     <div class="filter">
         <select name="maingroups" id="maingroups" class="filters mg1">

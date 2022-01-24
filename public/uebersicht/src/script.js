@@ -2,7 +2,6 @@ import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
-import { Scene } from "three";
 
 const $ = require("jquery");
 /**
@@ -39,7 +38,7 @@ const particleTexture = textureloader.load('particle.png')
 
 
 // Create random "positions"
-for ( let i = 0; i < 1000; i ++ ) {
+for ( let i = 0; i < 1100; i ++ ) {
 
   const x = Math.random() * 20 - 10;
   const y = Math.random() * 20 - 10;
@@ -53,13 +52,12 @@ const geometry = new THREE.BufferGeometry();
 geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
 
 parameters = [
-    [[ 1.0, 0.2, 0.5 ], 0.02 ],
-    [[ 0.95, 0.1, 0.5 ], 0.11 ],
-    [[ 0.90, 0.05, 0.5 ], 0.17 ],
-    [[ 0.85, 0, 0.5 ], 0.1 ],
-    [[ 0.80, 0, 0.5 ], 0.06 ]
+  [[ 1.0, 0.2, 0.5 ], 0.05 ],
+  [[ 0.95, 0.1, 0.5 ], 0.3 ],
+  [[ 0.90, 0.05, 0.5 ], 0.2 ],
+  [[ 0.85, 0, 0.5 ], 0.3 ],
+  [[ 0.80, 0, 0.5 ], 0.1 ]
 ];
-
 
 // MATERIAL/PARTICLES
 for ( let i = 0; i < parameters.length; i ++ ) {
@@ -68,13 +66,16 @@ for ( let i = 0; i < parameters.length; i ++ ) {
   const size = parameters[ i ][ 1 ];
 
   materials[ i ] = new THREE.PointsMaterial({
-      size: size,
-      color: 0xB461D1,
-      map: particleTexture,
-      blending: THREE.AdditiveBlending, 
-      depthTest: false, 
-      transparent: true 
-  });
+    size: size,
+    color: 0x816CFF,
+    map: particleTexture,
+    blending: THREE.AdditiveBlending, 
+    depthTest: false, 
+    transparent: true,
+    alphaMap: particleTexture,
+    alphaTest: 0.001,
+    depthTest: false
+});
 
   // CREATE PARTICLES
   particles = new THREE.Points( geometry, materials[ i ] );
@@ -142,19 +143,12 @@ function createTable(filterVar) {
           const object = new THREE.Mesh(geometryBox, new THREE.MeshBasicMaterial({
             // color: 0xFFFFFF,
             map: textures[filteredElements[c]],
-            // fog: true,
-            // map: goldTexture,
-            // transparent: true,
-            // opacity: 0.99,
-            // alpha: true,
-            // side: THREE.DoubleSide
         }))
-          object.lookAt(vector);
           targets.table.push(object);
           // add cubes to scene
           scene.add(targets.table[c]);
-          targets.table[i].position.x = 6 - col * 1.8;
-          targets.table[i].position.y = row * 2.5;
+          // targets.table[i].position.x = 6 - col * 1.8;
+          // targets.table[i].position.y = row * 2.5;
         } 
         c++   
       }
@@ -170,14 +164,7 @@ function createTable(filterVar) {
       const object = new THREE.Mesh(geometryBox, new THREE.MeshBasicMaterial({
         // color: 0xFFFFFF,
         map: textures[i],
-        // fog: true,
-        // map: goldTexture,
-        // transparent: true,
-        // opacity: 0.99,
-        // alpha: true,
-        // side: THREE.DoubleSide
     }))
-      object.lookAt(vector);
       targets.table.push(object);
       targets.table[i].position.x = 6 - col * 1.8;
       targets.table[i].position.y = row * 2.5;
@@ -193,26 +180,14 @@ function createTable(filterVar) {
 
 
 function createHelix() {
-  const objects = [];
   $.getJSON("periodic-table.json", function (data) {
     for (let i = 0; i < data.length; i++) {
       const theta = i * 0.175 + Math.PI; //default  0.175
       const y = -(i * 0.05) + 2;
 
-      // const edges = new THREE.EdgesGeometry(geometryBox);
-      // const object = new THREE.LineSegments(
-      //   edges,
-      //   new THREE.LineBasicMaterial({ color: 0xff9900 })
-      // );
       const object = new THREE.Mesh(geometryBox, new THREE.MeshBasicMaterial({
         // color: 0xFFFFFF,
         map: textures[i],
-        // fog: true,
-        // map: goldTexture,
-        // transparent: true,
-        // opacity: 0.99,
-        // alpha: true,
-        // side: THREE.DoubleSide
     }))
       object.position.setFromCylindricalCoords(8, theta, y);
 
@@ -265,10 +240,18 @@ document.getElementById("starter").addEventListener("click", () => {
   $(".section").fadeOut();
   $(".switcher").fadeIn();
   $(".filter").fadeIn();
-  createTable();
-  camera.position.x = 5;
+  $(".toggle").fadeIn();
+  $(".state").fadeIn();
+  $(".logo-helix").fadeIn();
+  createHelix();
+  // createTable();
+  // camera.position.x = 5;
   camera.position.z = -15;
-  camera.position.z = 15;
+
+  //Controls resetten
+  controls.target.set( 0, -1.5, 0 );
+  //Verschieben vehindern - Helixansicht
+  controls.enablePan = false;
 });
 
 
@@ -288,7 +271,7 @@ controls.enableDamping = true;
  */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
-  // alpha: true
+  alpha: true
 });
 // renderer.setClearAlpha(0)
 renderer.setSize(sizes.width, sizes.height);
@@ -350,7 +333,7 @@ const tick = () => {
     // }
 
     if(intersects.length >0) {
-      intersects[0].object.material.color.set('#AAAAAA')
+      intersects[0].object.material.color.set('#CBC3FF')
     }
   
   
@@ -386,27 +369,36 @@ tick();
 
 // button functionality
 
-$(".table").on("click", () => {
-  createTable();
-  $(".btn").removeClass("active");
-  $(".table").addClass("active");
-  for (let i = 0; i < targets.helix.length; i++) {
+$(".btn").on("click", (event) => {
+  event.preventDefault;
+
+  let klick = $(event.target);
+  if (klick.is('.active')){
+    createTable();
+    $(".btn").removeClass("active");
+    $(".state").text("Grid");
+    for (let i = 0; i < targets.helix.length; i++) {
     scene.remove(targets.helix[i]);
   }
   raycasterTestObjects = targets.table;
-});
-
-$(".helix").on("click", () => {
-  createHelix();
-  $(".btn").removeClass("active");
-  $(".helix").addClass("active");
-  for (let i = 0; i < targets.table.length; i++) {
-    scene.remove(targets.table[i]);
+  controls.enablePan = true;
+  camera.position.set(0,0,15)
+  } else {
+    createHelix();
+    $(".btn").addClass("active");
+    $(".state").text("Helix");
+    console.log(document.getElementsByClassName("btn"));
+    for (let i = 0; i < targets.table.length; i++) {
+      scene.remove(targets.table[i]);
   }
   raycasterTestObjects = targets.helix;
 
   //Camera neu positionieren
-  camera.position.set(0,0,15)
+  camera.position.set(0, 0, 14)
+  //Camera zeigt auf
+  controls.target.set( 0, -1.5, 0 );
+  controls.enablePan = false;
+}
 });
 
 $(".mg1").on("change", () => {
@@ -421,6 +413,7 @@ $(".mg1").on("change", () => {
   }
   createTable(s);
   raycasterTestObjects = targets.table;
+  controls.enablePan = true;
 })
 
 $(".sts").on("change", () => {
@@ -435,6 +428,7 @@ $(".sts").on("change", () => {
   }
   createTable(s);
   raycasterTestObjects = targets.table;
+  controls.enablePan = true;
 })
 
 $(".bt").on("change", () => {
@@ -449,6 +443,7 @@ $(".bt").on("change", () => {
   }
   createTable(s);
   raycasterTestObjects = targets.table;
+  controls.enablePan = true;
 })
 // würfel langsam asblenden
 // filter - in der for schleife abkürzen

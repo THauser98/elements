@@ -9,7 +9,7 @@ $.getJSON('./periodic-table.json', function(data){ //API Request
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
 
-            var value = 2;
+            var pivot = new THREE.Object3D();
             var ordnungszahl = 80;   //Index Ordnungszahl
 
             let id = urlParams.get("id");
@@ -201,6 +201,8 @@ var angle = 1;
         var yPos = 0;
         var R = 1500;  
         var abstand = 1000;
+        pivot.position.set(0,0,0);
+        pivot.rotation.set(0,0,0);
 
         //Versuch Schalenaufbau
 
@@ -212,12 +214,12 @@ var angle = 1;
 
                 var geometry = new THREE.SphereGeometry(80, 50, 16);
                 var material = new THREE.MeshLambertMaterial({
-                    color: 0xEBB1FF, // Color Electrons
+                    color: 0xFFFFFF, // Color Electrons
                 });
 
-                const circlegeometry = new THREE.RingGeometry( R, R+10, 50 );
+                const circlegeometry = new THREE.RingGeometry( R, R+10, 80 );
                 const circlematerial = new THREE.MeshBasicMaterial({ 
-                    color: 0x5D2571, // Color Circles
+                    color: 0x816CFF, // Color Circles
                     side: THREE.DoubleSide,
                  });
                 const circle = new THREE.Mesh( circlegeometry, circlematerial );
@@ -225,18 +227,19 @@ var angle = 1;
 
 
                 var mesh = new THREE.Mesh(geometry, material);
+                pivot.add(mesh);
 
                 mesh.position.set(xPos, yPos, 0);    
                 console.log(xPos);   
-                scene.add(mesh);
+                // scene.add(mesh);
 
             }
             R += abstand;
-            mesh.rotation.z = value;
+            // mesh.rotation.z = value;
 
         }
         
-
+        scene.add(pivot)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -247,7 +250,7 @@ var angle = 1;
             if(i % 2 == true) {
                 var geo = new THREE.SphereGeometry(nodes[i].radius, 20, 20);
                 var sphere = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({
-                    color: 0x5D2571,     //hälfte grau
+                    color: 0x816CFF,     // hälfte dunkler
                 }));
                 var vec = new THREE.Vector3(nodes[i].x, nodes[i].y, nodes[i].z);
                 sphere.position.add(vec);
@@ -257,7 +260,7 @@ var angle = 1;
             } else {           
                 var geo = new THREE.SphereGeometry(nodes[i].radius, 20, 20);
                 var sphere = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({
-                    color: 0xB461D1,     //hälfte schwarz
+                    color: 0xE1BEFF,     //hälfte heller
                 }));
                 var vec = new THREE.Vector3(nodes[i].x, nodes[i].y, nodes[i].z);
                 sphere.position.add(vec);
@@ -293,9 +296,9 @@ var angle = 1;
         // RENDERER
 
         renderer = new THREE.WebGLRenderer({
-            antialias: true
+            antialias: true,
+            alpha: true
         });
-        renderer.setClearColor( 0x000000 );
 
         renderer.setSize(containerEle.innerWidth(), containerEle.innerHeight());
         renderer.domElement.style.position = 'absolute';
@@ -348,7 +351,7 @@ var angle = 1;
 
 
         updateSpheres();
-        
+        pivot.rotation.z += 0.002;
 
         renderer.render(scene, camera);
 
@@ -375,13 +378,13 @@ var standardState = data[ordnungszahl-1].standardState
 var pElement = data[ordnungszahl-1]
 
 if(standardState == "solid") {
-    $('.standardstate').attr('src', './static/solid_cube_white_cropped.mp4');
+    $('.standardstate').attr('src', './static/solid_cube_masked.webm');
 } else if (standardState == "liquid") {
-    $('.standardstate').attr('src', './static/fluid_geometry_white_cropped.mp4');
+    $('.standardstate').attr('src', './static/fluid_sphere_masked.webm');
 } else if (standardState == "gas") {
-    $('.standardstate').attr('src', './static/gas_volume_white_cropped.mp4');
+    $('.standardstate').attr('src', './static/cloud_sphere_masked.webm');
 } else {
-    $('.standardstate').attr('src', './static/solid_cube_white_cropped.mp4');
+    $('.standardstate').attr('src', '');
 }
 
 $('#atomicnumber').text(pElement.atomicNumber)

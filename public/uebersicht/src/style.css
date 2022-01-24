@@ -2,13 +2,18 @@
 {
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    text-rendering:optimizeLegibility
 }
 
 html,
 body
 {
     overflow: hidden;
-    background: rgb(24,24, 24);
+    background: rgb(30, 30, 30);
+    cursor: url(../static/cursor-arrow.svg) 5 5, auto;
 }
 
 .webgl
@@ -51,12 +56,19 @@ img {
 }
 
 .section p {
-    font-size: 1.5vmin;
+    font-size: 0.9rem;
     width: 30%;
 }
 
 .logo {
-    width: 10%;
+    width: 14%;
+}
+
+.logo-helix {
+    position: absolute;
+    width: 12rem;
+    margin: 2.5rem;
+    display: none;
 }
 
 .section button {
@@ -73,8 +85,8 @@ img {
 .switcher{
     display: none;
     position: absolute;
-    bottom: 20px;
-    left: 45%;    
+    top: 3.1rem;
+    right: 3rem;   
     align-items: center;
     justify-content: space-around;
 }
@@ -82,8 +94,8 @@ img {
 .filter{
     display: none;
     position: absolute;
-    top: 10px;
-    left: 5%;    
+    bottom: 3rem;
+    left: 40%;   
     align-items: center;
     justify-content: space-around;
 }
@@ -100,21 +112,30 @@ img {
 }
 
 .filters{
+    bottom: -20rem;
     width: 130px;
     height: 40px;
     color: white;
-    background: black;
+    background: rgb(35, 35, 35);
+    /* background: black; */
     padding: 10px;
     border: 2px solid white;
     transition: all 2s;
     margin: 3px;
+    border-radius: 3rem;
 }
 
 .filters option{
     color: white;
-    background: black;
     padding: 10px;
-    border: 2px solid white;
+    border: 1px solid white;
+    background-color: rgb(35, 35, 35);
+}
+
+.filters:hover {
+    border-color: #816CFF;
+    color: #816CFF;
+    cursor: url(../static/cursor-hand.svg) 5 5, auto;
 }
 
 .active{
@@ -123,24 +144,109 @@ img {
 
 .switcher button:hover{
     color: gold;
-    background: rgb(24,24, 24);
+    background: rgb(35,35, 35);
+    cursor: url(../static/cursor-hand.svg) 5 5, auto;
 }
 
 #starter {
     width: 10rem;
     padding: 1rem;
-    border: white solid 0.1rem;
-    /* border: none; */
+    border: rgb(255, 255, 255) solid 0.1rem;
     border-radius: 3rem;
     background: none;
     color: white;
     font-size: 1.0rem;
     font-family: 'M PLUS Rounded 1c', sans-serif;
+    margin-top: 3rem;
     /* background-color: rgb(75, 0, 71); */
 }
 
 #starter:hover {
     border-width: 0.15rem;
     cursor:pointer;
+    border-color: #816CFF;
+    transition: border ease-in-out 0.5s;
+    cursor: url(../static/cursor-hand.svg) 5 5, auto;
 }
 
+
+.toggle {
+    display: none;
+    position: absolute;
+    right: 2.5rem;
+    top: 4rem;
+}
+
+.state {
+    display: none;
+    position: absolute;
+    right: 2.5rem;
+    top: 7rem;
+    color: white;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.2rem;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    display: none;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #816CFF;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #816CFF;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
