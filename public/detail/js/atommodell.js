@@ -17,7 +17,8 @@ $.getJSON('./periodic-table.json', function(data){ //API Request
             if(id !== null) {
                 ordnungszahl = parseInt(id);
             }
-
+            $('.left').attr('href', '/detail/?id=' + (ordnungszahl - 1));
+            $('.right').attr('href', '/detail/?id=' + (ordnungszahl + 1));
             var quaternion = new THREE.Quaternion();
             var object;
             
@@ -397,4 +398,8 @@ $('#electronegativity').text(pElement.electronegativity)
 $('#yeardiscovered').text(pElement.yearDiscovered)
 
 $('.state').text(pElement.standardState)
+})
+
+$('.x').on('click', () => {
+    window.location.replace('/?started=true');
 })
