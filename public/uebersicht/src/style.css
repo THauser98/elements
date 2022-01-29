@@ -206,7 +206,7 @@ img {
   /* The slider */
   .slider {
     position: absolute;
-    cursor: pointer;
+    cursor: url(../static/cursor-hand.svg) 5 5, auto;
     top: 0;
     left: 0;
     right: 0;

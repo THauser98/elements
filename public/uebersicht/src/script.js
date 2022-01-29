@@ -271,6 +271,7 @@ controls.enableDamping = true;
  */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  antialias: true,
   alpha: true
 });
 // renderer.setClearAlpha(0)
