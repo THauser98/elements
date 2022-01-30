@@ -131,8 +131,8 @@ const geometryBox = new RoundedBoxGeometry(1, 1, 1, 10, 0.1)
 function createTable(filterVar) {
   console.log(filterVar);
   // rows and cols for the grid
-  let row = 0;
-  let col = 0;
+  let row = Math.round((118 / 16) / 2) - 1;
+  let col = -6;
   let c = 0;
   let pos = 0;
   let filteredElements = []
@@ -164,13 +164,14 @@ function createTable(filterVar) {
         pos++;
       }
       console.log(targets.table);
+      raycasterTestObjects = targets.table;
     }
     else{
       for(let i = 0; i < data.length; i++){
         // grid
-      if (col > 11) {
+      if (col > 10) {
         row--;
-        col = 0;
+        col = -6;
       }
       const object = new THREE.Mesh(geometryBox, new THREE.MeshBasicMaterial({
         // color: 0xFFFFFF,
@@ -178,13 +179,14 @@ function createTable(filterVar) {
     }))
     object.name = i;
       targets.table.push(object);
-      targets.table[i].position.x = 6 - col * 1.8;
+      targets.table[i].position.x = col * 1.8;
       targets.table[i].position.y = row * 2.5;
       // add cubes to scene
       scene.add(targets.table[i]);
       // up the column
       col++;
-      }      
+      }   
+      raycasterTestObjects = targets.table;   
     }
   });
 }
@@ -216,6 +218,9 @@ function createHelix() {
       scene.add(targets.helix[i]);
     }
   });
+  raycasterTestObjects = targets.helix;
+  camera.position.set(0, 0, -15);
+  controls.target.set(0, -1.5, 0);
 }
 
 // raycaster
@@ -265,7 +270,7 @@ document.getElementById("starter").addEventListener("click", () => {
   //Controls resetten
   controls.target.set( 0, -1.5, 0 );
   //Verschieben vehindern - Helixansicht
-  controls.enablePan = false;
+  // controls.enablePan = false;
 });
 
 
@@ -360,6 +365,7 @@ const tick = () => {
             console.log(intersects[0]);
             redirectId = intersects[0].object.name + 1;
             console.log(redirectId);
+            
         }
     
         currentIntersect = intersects[0]
@@ -439,11 +445,22 @@ $('.btn').on('click', () => {
     }
     createTable();
     //Camera neu positionieren
-    camera.position.set(0, 0, 14)
+    camera.position.set(2.28, -8.75, 14.62);
     //Camera zeigt auf
-    controls.target.set( 0, -1.5, 0 );
-    controls.enablePan = false;
+    controls.target.set( 3, -5, 0.5);
+    controls.enablePan = true;
   }
+})
+
+$('.logo-helix').on('click', () => {
+  
+  $('.btn').removeClass('active');
+    $('.state').text('Helix');
+    for (let i = 0; i < targets.table.length; i++) {
+      scene.remove(targets.table[i]);
+    }
+    createHelix();
+    
 })
 
 $(".mg1").on("change", () => {
@@ -509,9 +526,11 @@ if(reroute) {
 
 
 $(() => {
-  $(window).on('click', () => {
+  $(window).on('dblclick', () => {
     if(redirectId && redirectId > 0){
       window.location.replace('/detail?id=' + redirectId);
-    }    
+    }  
+    console.log(camera.position);
+    console.log(camera)
   })
 })

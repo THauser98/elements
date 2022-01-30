@@ -10,7 +10,7 @@ $.getJSON('./periodic-table.json', function(data){ //API Request
             const urlParams = new URLSearchParams(queryString);
 
             var pivot = new THREE.Object3D();
-            var ordnungszahl = 80;   //Index Ordnungszahl
+            var ordnungszahl = 0;   //Index Ordnungszahl
 
             let id = urlParams.get("id");
 
@@ -26,7 +26,7 @@ $.getJSON('./periodic-table.json', function(data){ //API Request
                 // Spalten-Nummer ist Anzahl von Außenatomen
 
              var anzSchalen = 1;
-             var config = data[ordnungszahl].electronicConfiguration;
+             var config = data[ordnungszahl - 1].electronicConfiguration;
              var parts;
              var he = "1s2";
              var ne = he + " 2s2 2p6";
@@ -89,18 +89,18 @@ $.getJSON('./periodic-table.json', function(data){ //API Request
                  }
              }
              console.log(atomVerteilung);
-             console.log(data[ordnungszahl].name);
+             console.log(data[ordnungszahl - 1].name);
 
 
 
 
 
 
-             var anzElektronen = data[ordnungszahl].atomicNumber;
+             var anzElektronen = data[ordnungszahl - 1].atomicNumber;
              var anzAussenelektronen = (anzElektronen- 2) % 8;
 
              var kernZahl;
-             if (ordnungszahl == 0) {
+             if (ordnungszahl == 1) {
                  kernZahl = 2;
              } else {
                  kernZahl = 2*anzElektronen+1
@@ -400,6 +400,6 @@ $('#yeardiscovered').text(pElement.yearDiscovered)
 $('.state').text(pElement.standardState)
 })
 
-$('.x').on('click', () => {
+$('.x, .logo').on('click', () => {
     window.location.replace('/?started=true');
 })
