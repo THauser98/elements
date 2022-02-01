@@ -134,11 +134,11 @@ function createTable(filterVar) {
   let row = Math.round((118 / 16) / 2) - 1;
   let col = -8;
   let c = 0;
-  let pos = 0;
   let filteredElements = []
 
   $.getJSON("periodic-table.json", function (data) {
     if(filterVar){
+      console.log("test");
       for(let i = 0; i < data.length; i++){
         if(filterVar === data[i].groupBlock || filterVar === data[i].standardState || filterVar === data[i].bondingType){
           if (col > 11) {
@@ -193,30 +193,68 @@ function createTable(filterVar) {
 
 
 
-function createHelix() {
+function createHelix(filterVar) {
+  let c = 0;
+  let pos = 0;
+  let filteredElements = [];
+
   $.getJSON("periodic-table.json", function (data) {
-    for (let i = 0; i < data.length; i++) {
-      const theta = i * 0.175 + Math.PI; //default  0.175
-      const y = -(i * 0.05) + 2;
-
-      const object = new THREE.Mesh(geometryBox, new THREE.MeshBasicMaterial({
-        // color: 0xFFFFFF,
-        map: textures[i]
-    }))
-      object.name = i;
-      
-      object.position.setFromCylindricalCoords(8, theta, y);
-
-      vector.x = object.position.x * 2;
-      vector.y = object.position.y;
-      vector.z = object.position.z * 2;
-
-      object.lookAt(vector);
-
-      targets.helix.push(object);
-
-      scene.add(targets.helix[i]);
+    if(filterVar){
+      for(let i = 0; i < data.length; i++){
+        const theta = i * 0.175 + Math.PI; //default  0.175
+        const y = -(i * 0.05) + 2;
+        if(filterVar === data[i].groupBlock || filterVar === data[i].standardState || filterVar === data[i].bondingType){
+         
+          filteredElements[c] = i+1
+          console.log(data[i].name);
+          console.log(c);
+          const object = new THREE.Mesh(geometryBox, new THREE.MeshBasicMaterial({
+            // color: 0xFFFFFF,
+            map: textures[filteredElements[c]],
+        }))
+        object.name = i;
+        
+        object.position.setFromCylindricalCoords(8, theta, y);
+  
+        vector.x = object.position.x * 2;
+        vector.y = object.position.y;
+        vector.z = object.position.z * 2;
+  
+        object.lookAt(vector);
+          targets.helix.push(object);
+          // add cubes to scene
+          scene.add(targets.helix[c]);
+        } 
+        c++   
+      }
+      console.log(targets.helix);
+      raycasterTestObjects = targets.helix;
     }
+    else{
+      for (let i = 0; i < data.length; i++) {
+        const theta = i * 0.175 + Math.PI; //default  0.175
+        const y = -(i * 0.05) + 2;
+  
+        const object = new THREE.Mesh(geometryBox, new THREE.MeshBasicMaterial({
+          // color: 0xFFFFFF,
+          map: textures[i]
+      }))
+        object.name = i;
+        
+        object.position.setFromCylindricalCoords(8, theta, y);
+  
+        vector.x = object.position.x * 2;
+        vector.y = object.position.y;
+        vector.z = object.position.z * 2;
+  
+        object.lookAt(vector);
+  
+        targets.helix.push(object);
+  
+        scene.add(targets.helix[i]);
+      }
+    }
+    
   });
   raycasterTestObjects = targets.helix;
   camera.position.set(0, 0, -15);
@@ -445,9 +483,9 @@ $('.btn').on('click', () => {
     }
     createTable();
     //Camera neu positionieren
-    camera.position.set(3, -8, 13);
+    camera.position.set(0, -8, 13);
     //Camera zeigt auf
-    controls.target.set( 3, -2, 0);
+    controls.target.set( 0, -2, 0);
     controls.enablePan = true;
   }
 })
@@ -468,13 +506,17 @@ $(".mg1").on("change", () => {
   for (let i = 0; i < targets.table.length; i++) {
     scene.remove(targets.table[i]);
   }
-  $(".btn").removeClass("active");
-  $(".table").addClass("active");
   for (let i = 0; i < targets.helix.length; i++) {
     scene.remove(targets.helix[i]);
   }
-  createTable(s);
-  raycasterTestObjects = targets.table;
+  if($('.btn').hasClass('active')){
+    createTable(s);
+    raycasterTestObjects = targets.table;
+  }
+  else{
+    createHelix(s);
+    raycasterTestObjects = targets.helix;
+  }  
   controls.enablePan = true;
 })
 
@@ -482,14 +524,18 @@ $(".sts").on("change", () => {
   let s = $('.sts').val();
   for (let i = 0; i < targets.table.length; i++) {
     scene.remove(targets.table[i]);
-  }
-  $(".btn").removeClass("active");
-  $(".table").addClass("active");
+  } 
   for (let i = 0; i < targets.helix.length; i++) {
     scene.remove(targets.helix[i]);
   }
-  createTable(s);
-  raycasterTestObjects = targets.table;
+  if($('.btn').hasClass('active')){
+    createTable(s);
+    raycasterTestObjects = targets.table;
+  }
+  else{
+    createHelix(s);
+    raycasterTestObjects = targets.helix;
+  }
   controls.enablePan = true;
 })
 
@@ -498,14 +544,17 @@ $(".bt").on("change", () => {
   for (let i = 0; i < targets.table.length; i++) {
     scene.remove(targets.table[i]);
   }
-  $(".btn").removeClass("active");
-  $(".table").addClass("active");
   for (let i = 0; i < targets.helix.length; i++) {
     scene.remove(targets.helix[i]);
   }
-  createTable(s);
-  raycasterTestObjects = targets.table;
-  controls.enablePan = true;
+  if($('.btn').hasClass('active')){
+    createTable(s);
+    raycasterTestObjects = targets.table;
+  }
+  else{
+    createHelix(s);
+    raycasterTestObjects = targets.helix;
+  }
 })
 // würfel langsam asblenden
 // filter - in der for schleife abkürzen
