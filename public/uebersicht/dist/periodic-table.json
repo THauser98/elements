@@ -2194,7 +2194,7 @@
     "meltingPoint": "1800",
     "name": "Fermium",
     "oxidationStates": "2, 3",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Fm",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1952"
@@ -2216,7 +2216,7 @@
     "meltingPoint": "1100",
     "name": "Mendelevium",
     "oxidationStates": "2, 3",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Md",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1955"
@@ -2238,7 +2238,7 @@
     "meltingPoint": "1100",
     "name": "Nobelium",
     "oxidationStates": "2, 3",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "No",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1957"
@@ -2260,7 +2260,7 @@
     "meltingPoint": "1900",
     "name": "Lawrencium",
     "oxidationStates": "3",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Lr",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1961"
@@ -2282,7 +2282,7 @@
     "meltingPoint": "",
     "name": "Rutherfordium",
     "oxidationStates": "4",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Rf",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1969"
@@ -2304,7 +2304,7 @@
     "meltingPoint": "",
     "name": "Dubnium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Db",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1967"
@@ -2326,7 +2326,7 @@
     "meltingPoint": "",
     "name": "Seaborgium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Sg",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1974"
@@ -2348,7 +2348,7 @@
     "meltingPoint": "",
     "name": "Bohrium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Bh",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1976"
@@ -2370,7 +2370,7 @@
     "meltingPoint": "",
     "name": "Hassium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Hs",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1984"
@@ -2392,7 +2392,7 @@
     "meltingPoint": "",
     "name": "Meitnerium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Mt",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1982"
@@ -2414,7 +2414,7 @@
     "meltingPoint": "",
     "name": "Darmstadtium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Ds",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1994"
@@ -2436,7 +2436,7 @@
     "meltingPoint": "",
     "name": "Roentgenium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Rg",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1994"
@@ -2458,7 +2458,7 @@
     "meltingPoint": "",
     "name": "Copernicium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Cn",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1996"
@@ -2480,7 +2480,7 @@
     "meltingPoint": "",
     "name": "Nihonium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Nh",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "2003"
@@ -2502,7 +2502,7 @@
     "meltingPoint": "",
     "name": "Flerovium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Fl",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "1998"
@@ -2524,7 +2524,7 @@
     "meltingPoint": "",
     "name": "Moscovium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Mc",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "2003"
@@ -2546,7 +2546,7 @@
     "meltingPoint": "",
     "name": "Livermorium",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Lv",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "2000"
@@ -2568,7 +2568,7 @@
     "meltingPoint": "",
     "name": "Tennessine",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Ts",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "2010"
@@ -2590,7 +2590,7 @@
     "meltingPoint": "",
     "name": "Oganesson",
     "oxidationStates": "",
-    "standardState": "",
+    "standardState": "solid",
     "symbol": "Og",
     "vanDelWaalsRadius": "",
     "yearDiscovered": "2002"
