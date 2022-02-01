@@ -161,7 +161,6 @@ function createTable(filterVar) {
           col++;
         } 
         c++   
-        pos++;
       }
       console.log(targets.table);
       raycasterTestObjects = targets.table;
@@ -221,7 +220,7 @@ function createHelix(filterVar) {
         vector.z = object.position.z * 2;
   
         object.lookAt(vector);
-          targets.helix.push(object);
+        targets.helix.push(object);
           // add cubes to scene
           scene.add(targets.helix[c]);
         } 
@@ -230,7 +229,7 @@ function createHelix(filterVar) {
       console.log(targets.helix);
       raycasterTestObjects = targets.helix;
     }
-    else{
+    else if(!filterVar){
       for (let i = 0; i < data.length; i++) {
         const theta = i * 0.175 + Math.PI; //default  0.175
         const y = -(i * 0.05) + 2;
@@ -250,13 +249,14 @@ function createHelix(filterVar) {
         object.lookAt(vector);
   
         targets.helix.push(object);
-  
+        
         scene.add(targets.helix[i]);
       }
+      raycasterTestObjects = targets.helix;
     }
     
   });
-  raycasterTestObjects = targets.helix;
+  
   camera.position.set(0, 0, -15);
   controls.target.set(0, -1.5, 0);
 }
@@ -431,40 +431,7 @@ const tick = () => {
 tick();
 
 
-// button functionality
-/*
-$(".btn").on("click", (event) => {
-  event.preventDefault;
 
-  let klick = $(event.target);
-  if (klick.is('.active')){
-    createTable();
-    $(".btn").removeClass("active");
-    $(".state").text("Grid");
-    for (let i = 0; i < targets.helix.length; i++) {
-    scene.remove(targets.helix[i]);
-  }
-  raycasterTestObjects = targets.table;
-  controls.enablePan = true;
-  camera.position.set(0,0,15)
-  } else {
-    createHelix();
-    $(".btn").addClass("active");
-    $(".state").text("Helix");
-    console.log(document.getElementsByClassName("btn"));
-    for (let i = 0; i < targets.table.length; i++) {
-      scene.remove(targets.table[i]);
-  }
-  raycasterTestObjects = targets.helix;
-
-  //Camera neu positionieren
-  camera.position.set(0, 0, 14)
-  //Camera zeigt auf
-  controls.target.set( 0, -1.5, 0 );
-  controls.enablePan = false;
-}
-});
-*/
 
 $('.btn').on('click', () => {
   if($('.btn').hasClass('active')){
@@ -511,11 +478,9 @@ $(".mg1").on("change", () => {
   }
   if($('.btn').hasClass('active')){
     createTable(s);
-    raycasterTestObjects = targets.table;
   }
   else{
     createHelix(s);
-    raycasterTestObjects = targets.helix;
   }  
   controls.enablePan = true;
 })
@@ -530,11 +495,9 @@ $(".sts").on("change", () => {
   }
   if($('.btn').hasClass('active')){
     createTable(s);
-    raycasterTestObjects = targets.table;
   }
   else{
     createHelix(s);
-    raycasterTestObjects = targets.helix;
   }
   controls.enablePan = true;
 })
@@ -549,11 +512,9 @@ $(".bt").on("change", () => {
   }
   if($('.btn').hasClass('active')){
     createTable(s);
-    raycasterTestObjects = targets.table;
   }
   else{
     createHelix(s);
-    raycasterTestObjects = targets.helix;
   }
 })
 // würfel langsam asblenden
@@ -581,6 +542,7 @@ $(() => {
     }  
     console.log(camera.position);
     console.log(camera)
+    console.log(raycasterTestObjects);
   })
   $(window).on('click', () => {
     if(redirectId && redirectId > 0 && alertTimer){
