@@ -130,6 +130,8 @@ const geometryBox = new RoundedBoxGeometry(1, 1, 1, 10, 0.1)
 
 function createTable(filterVar) {
   console.log(filterVar);
+  raycasterTestObjects = [];
+  targets.table = [];
   // rows and cols for the grid
   let row = Math.round((118 / 16) / 2) - 1;
   let col = -8;
@@ -145,7 +147,7 @@ function createTable(filterVar) {
             row--;
             col = 0;
           }
-          filteredElements[c] = i+1
+          filteredElements[c] = i;
           console.log(data[i].name);
           console.log(c);
           const object = new THREE.Mesh(geometryBox, new THREE.MeshBasicMaterial({
@@ -159,8 +161,9 @@ function createTable(filterVar) {
           //targets.table[i].position.x = 6 - col * 1.8;
           //targets.table[i].position.y = row * 2.5;
           col++;
+          c++;
         } 
-        c++   
+          
       }
       console.log(targets.table);
       raycasterTestObjects = targets.table;
@@ -196,17 +199,18 @@ function createHelix(filterVar) {
   let c = 0;
   let pos = 0;
   let filteredElements = [];
-
+  raycasterTestObjects = [];
+  targets.helix = [];
   $.getJSON("periodic-table.json", function (data) {
     if(filterVar){
+      
       for(let i = 0; i < data.length; i++){
         const theta = i * 0.175 + Math.PI; //default  0.175
         const y = -(i * 0.05) + 2;
         if(filterVar === data[i].groupBlock || filterVar === data[i].standardState || filterVar === data[i].bondingType){
          
-          filteredElements[c] = i+1
+          filteredElements[c] = i;
           console.log(data[i].name);
-          console.log(c);
           const object = new THREE.Mesh(geometryBox, new THREE.MeshBasicMaterial({
             // color: 0xFFFFFF,
             map: textures[filteredElements[c]],
@@ -220,11 +224,14 @@ function createHelix(filterVar) {
         vector.z = object.position.z * 2;
   
         object.lookAt(vector);
+        
         targets.helix.push(object);
+        
           // add cubes to scene
           scene.add(targets.helix[c]);
+          c++;
         } 
-        c++   
+          
       }
       console.log(targets.helix);
       raycasterTestObjects = targets.helix;
