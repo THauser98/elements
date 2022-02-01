@@ -251,4 +251,14 @@ img {
     border-radius: 50%;
   }
 
+  .alert{
+      position: absolute;
+      display: none;
+      color: white;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      top: 5%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+  }
+
 /*# sourceMappingURL=main.css.map*/

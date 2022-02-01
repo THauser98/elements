@@ -403,3 +403,7 @@ $('.state').text(pElement.standardState)
 $('.x, .logo').on('click', () => {
     window.location.replace('/?started=true');
 })
+
+$(() => {
+    $('.info').fadeIn(1500).css('display', 'flex');
+})

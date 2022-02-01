@@ -132,7 +132,7 @@ function createTable(filterVar) {
   console.log(filterVar);
   // rows and cols for the grid
   let row = Math.round((118 / 16) / 2) - 1;
-  let col = -6;
+  let col = -8;
   let c = 0;
   let pos = 0;
   let filteredElements = []
@@ -169,9 +169,9 @@ function createTable(filterVar) {
     else{
       for(let i = 0; i < data.length; i++){
         // grid
-      if (col > 10) {
+      if (col > 8) {
         row--;
-        col = -6;
+        col = -8;
       }
       const object = new THREE.Mesh(geometryBox, new THREE.MeshBasicMaterial({
         // color: 0xFFFFFF,
@@ -445,9 +445,9 @@ $('.btn').on('click', () => {
     }
     createTable();
     //Camera neu positionieren
-    camera.position.set(2.28, -8.75, 14.62);
+    camera.position.set(0, 0, 15.5);
     //Camera zeigt auf
-    controls.target.set( 3, -5, 0.5);
+    controls.target.set( 0, 0, 0);
     controls.enablePan = true;
   }
 })
@@ -523,7 +523,7 @@ if(reroute) {
     $('#starter').click();
 }
 
-
+let alertTimer = true;
 
 $(() => {
   $(window).on('dblclick', () => {
@@ -533,4 +533,14 @@ $(() => {
     console.log(camera.position);
     console.log(camera)
   })
+  $(window).on('click', () => {
+    if(redirectId && redirectId > 0 && alertTimer){
+      $('.alert').fadeIn(500).delay(3000).fadeOut(500);
+      alertTimer = false;
+      setTimeout(resetAlertTimer, 60000);
+    }
+  })
 })
+function resetAlertTimer(){
+  alertTimer = true;
+}
