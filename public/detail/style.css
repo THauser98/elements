@@ -72,7 +72,7 @@ h4 {
 
 .logo {
 position: absolute;
-margin: 2rem;
+margin: 2.5rem;
 width: 12rem;
 z-index: 3;
 cursor: url(static/cursor-hand.svg) 5 5, auto;
@@ -84,18 +84,24 @@ video {
     margin-top: 1rem;
 }
 
+.gif {
+    width: 53%;
+    height: auto;
+    margin-top: 1rem;
+}
+
 .x {
     position: absolute;
     height: 5%;
-    margin: 2.5rem;
+    margin: 3rem 2.5rem;
     right: 26.5%;
     z-index: 4;
     cursor: url(static/cursor-hand.svg) 5 5, auto;
-    transition: all 2s;
+    transition: all 0.5s;
 }
 
 .x:hover{
-    height: 6%;
+    height: 5.5%;
 }
 
 .arrow-left {
@@ -105,6 +111,11 @@ video {
     top: 45%;
     z-index: 4;
     cursor: url(static/cursor-hand.svg) 5 5, auto;
+    transition: all 0.5s;
+}
+
+.arrow-left:hover{
+    height: 5.5%;
 }
 
 .arrow-right {
@@ -114,4 +125,9 @@ video {
     right: 5%;
     z-index: 4;
     cursor: url(static/cursor-hand.svg) 5 5, auto;
+    transition: all 0.5s;
+}
+
+.arrow-right:hover{
+    height: 5.5%;
 }

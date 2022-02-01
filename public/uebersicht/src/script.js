@@ -445,9 +445,9 @@ $('.btn').on('click', () => {
     }
     createTable();
     //Camera neu positionieren
-    camera.position.set(2.28, -8.75, 14.62);
+    camera.position.set(3, -8, 13);
     //Camera zeigt auf
-    controls.target.set( 3, -5, 0.5);
+    controls.target.set( 3, -2, 0);
     controls.enablePan = true;
   }
 })
@@ -510,7 +510,7 @@ $(".bt").on("change", () => {
 // würfel langsam asblenden
 // filter - in der for schleife abkürzen
 
-const gridHelper = new THREE.GridHelper(100,100)
+// const gridHelper = new THREE.GridHelper(100,100)
 // scene.add(gridHelper)
 
 
