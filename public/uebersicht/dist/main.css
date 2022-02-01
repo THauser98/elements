@@ -69,6 +69,8 @@ img {
     width: 12rem;
     margin: 2.5rem;
     display: none;
+    cursor: url(assets/images/1d1b204b9bfd970f.svg) 5 5, auto;
+    z-index: 5;
 }
 
 .section button {
@@ -158,14 +160,14 @@ img {
     font-size: 1.0rem;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     margin-top: 3rem;
+    transition: all ease-in-out 0.5s;
     /* background-color: rgb(75, 0, 71); */
 }
 
 #starter:hover {
-    border-width: 0.15rem;
     cursor:pointer;
     border-color: #816CFF;
-    transition: border ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
     cursor: url(assets/images/da1094b7e691aebf.svg) 5 5, auto;
 }
 
@@ -249,6 +251,16 @@ img {
   
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  .alert{
+      position: absolute;
+      display: none;
+      color: white;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      top: 5%;
+      left: 50%;
+      transform: translate(-50%, 50%);
   }
 
 /*# sourceMappingURL=main.css.map*/

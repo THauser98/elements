@@ -378,14 +378,26 @@ $(function () {
 var standardState = data[ordnungszahl-1].standardState
 var pElement = data[ordnungszahl-1]
 
+// VIDEOs
+// if(standardState == "solid") {
+//     $('.standardstate').attr('src', './static/solid_cube_masked.webm');
+// } else if (standardState == "liquid") {
+//     $('.standardstate').attr('src', './static/fluid_sphere_masked.webm');
+// } else if (standardState == "gas") {
+//     $('.standardstate').attr('src', './static/cloud_sphere_masked.webm');
+// } else {
+//     $('.standardstate').attr('src', '');
+// }
+
+// GIFs
 if(standardState == "solid") {
-    $('.standardstate').attr('src', './static/solid_cube_masked.webm');
+    $('.gif').attr('src', './static/cube_gif_800px_transparent.gif');
 } else if (standardState == "liquid") {
-    $('.standardstate').attr('src', './static/fluid_sphere_masked.webm');
+    $('.gif').attr('src', './static/fluid_gif_800px_transparent.gif');
 } else if (standardState == "gas") {
-    $('.standardstate').attr('src', './static/cloud_sphere_masked.webm');
+    $('.gif').attr('src', './static/cloud_gif_800px_violet.gif');
 } else {
-    $('.standardstate').attr('src', '');
+    $('.gif').attr('src', './static/cloud_gif_800px_violet.gif');
 }
 
 $('#atomicnumber').text(pElement.atomicNumber)
@@ -402,4 +414,8 @@ $('.state').text(pElement.standardState)
 
 $('.x, .logo').on('click', () => {
     window.location.replace('/?started=true');
+})
+
+$(() => {
+    $('.info').fadeIn(1500).css('display', 'flex');
 })
